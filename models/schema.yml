@@ -1,0 +1,14 @@
+version: 2
+sources:
+  - name: tiller
+    description: datas on multiple restaurants using tiller
+    loader: bigquery
+    tables:
+      - name: order_data
+        description: Table of restaurant tables
+      - name: order_line
+        description: Table of each product in each order
+      - name: payment_data
+        description: Table of payments details
+      - name: store_data
+        description: Table of different restaurants
