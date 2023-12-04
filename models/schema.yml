@@ -6,9 +6,33 @@ sources:
     tables:
       - name: order_data
         description: Table of restaurant tables
+        columns:
+          - name: id_order
+            description: Primary Key of the table
+            tests:
+              - unique
+              - not_null
       - name: order_line
         description: Table of each product in each order
+        columns:
+          - name: id_order_line
+            description: Primary Key of the table
+            tests:
+              - unique
+              - not_null
       - name: payment_data
         description: Table of payments details
+        columns:
+          - name: id_pay
+            description: Primary Key of the table
+            tests:
+              - unique
+              - not_null
       - name: store_data
         description: Table of different restaurants
+        columns:
+          - name: id_store
+            description: Primary Key of the table
+            tests:
+              - unique
+              - not_null
