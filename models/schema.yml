@@ -84,10 +84,24 @@ sources:
         description: Table of payments details
         columns:
           - name: id_pay
-            description: Primary Key of the table
+            description: if of payment
             tests:
               - unique
               - not_null
+          name: id_order
+            description: id_order corresponding to the payment. One id order can have several payment id (by type of payment mostly for example)
+          - name: dim_status
+            description: only "accepted" status, column to be dropped
+          - name: dim_type
+            description: Payment type (bank card, cash, ...)
+          - name: m_amount
+            description: Payment amount
+          - name: m_cashback
+            description: only 0, column to be dropped 
+          - name: m_credit
+            description: only 0, column to be dropped 
+          - name: date_created
+            description: date of the payment
       - name: store_data
         description: Table of different restaurants
         columns:
