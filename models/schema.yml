@@ -88,7 +88,7 @@ sources:
             tests:
               - unique
               - not_null
-          name: id_order
+          - name: id_order
             description: id_order corresponding to the payment. One id order can have several payment id (by type of payment mostly for example)
           - name: dim_status
             description: only "accepted" status, column to be dropped
