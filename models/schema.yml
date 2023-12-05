@@ -12,6 +12,28 @@ sources:
             tests:
               - unique
               - not_null
+          - name : id_store
+            description: Unique identification of the restaurant
+          - name : id_table
+            description: Unique identification of a table
+          - name : Id_waiter
+            description: Unique identification of a restaurant staff
+          - name : Id_device
+            description: Device id where order has been placed
+          - name : Date_opened
+            description: Device id where order has been placed
+          - name : date_closed
+            description: Table close date
+          - name : Dim_status
+            description: Status of the order
+          - name : Dim_source
+            description: Name of device where order has been placed
+          - name : M_nb_customer
+            description: Number of customers associated to order
+          - name : M_cached_payed
+            description: Price payed
+          - name : M_cached_price
+            description: Price to pay                
       - name: order_line
         description: Table of each product in each order
         columns:
@@ -20,6 +42,44 @@ sources:
             tests:
               - unique
               - not_null
+          - name: Id_order
+            description: Unique identification of an order
+          - name: Date_opended
+            description: Date item is ordered
+          - name: Date_created
+            description: Date item is saved
+          - name: m_quantity
+            description: Quantity
+          - name: m_unit_price
+            description: Price of an unit with vat
+          - name: m_unit_price_exc_vat
+            description: Price of an unit without vat 
+          - name: m_total_price_inc_vat
+            description: Total price of( unit * quantity) with vat
+          - name: m_total_price_exc_vat
+            description: Total price of( unit * quantity) without vat
+          - name: m_tax_percent
+            description: Vat percentage applied
+          - name: m_discount_amount
+            description: Discount
+          - name: dim_type
+            description:  Types (products, option, meal, discounts…)
+          - name: dim_category
+            description:  Category (beverages,Thé/cafe,Café Sachet,Suppléments …)
+          - name: dim_name
+            description: Item’s name (risotto, Tonic, Cidres, Mangue…)
+          - name: dim_status
+            description: Item status
+          - name: dim_feature_type
+            description: Item type
+          - name: dim_unit_measure
+            description: unit of measure of a product (UNIT, KILOGRAM,GRAM )
+          - name: dim_unit_measure_display
+            description: unit of measure of a product displayed (UNIT, KILOGRAM,GRAM )
+          - name: dim_category_translated
+            description: dim_category translated in english
+          - name: dim_name_translated
+            description: dim_name translated in english                                          
       - name: payment_data
         description: Table of payments details
         columns:
@@ -32,7 +92,17 @@ sources:
         description: Table of different restaurants
         columns:
           - name: id_store
-            description: Primary Key of the table
+            description: Primary Key of the table, identifiant unique du restaurant 
             tests:
               - unique
               - not_null
+          - name : date_created
+            description : Subscription date of the restaurant to Sum up, not the time the restaurant opened 
+          - name : dim_zipcode
+            description : zipcode du restaurant
+          - name : dim_country 
+            description : conutry code of the restaurant 
+          - name : Dim_currency 
+            description : local currency of the restaurant 
+
+        
