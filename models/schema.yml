@@ -84,7 +84,7 @@ sources:
         description: Table of payments details
         columns:
           - name: id_pay
-            description: if of payment
+            description: id of payment
             tests:
               - unique
               - not_null
