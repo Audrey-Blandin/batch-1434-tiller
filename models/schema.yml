@@ -171,3 +171,34 @@ models:
         description: Price of an unit with vat
       - name: m_total_price_inc_vat
         description: Total price of( unit * quantity) with vat
+  - name: int_global_performance
+    description: Table of each id order with corresponding waiter and table infos inc. nb customers, turnover and time spent on table
+    tests:
+      - not_null:
+          column_name:
+            - id_store
+            - date_opened
+            - date_closed
+            - m_cached_payed
+    columns:
+      - name: id_store
+        description: id of the store
+      - name: id_order
+        description: Primary Key of the table
+        tests:
+          - unique
+          - not_null
+      - name: id_table
+        description: id of the table (one id table by order id)
+      - name: id_waiter
+        description: id of the waiter in charge of the table (one waiter id by order id)
+      - name: date_opened
+        description: date/hour when the table is opened
+      - name: date_closed
+        description: date/hour when the table is closed
+      - name: minutes_on_a_table
+        description: time spent on the table(s) in minutes
+      - name: m_nb_customer 
+        description: number of people at the table
+      - name: m_cached_payed
+        description: order price paid
