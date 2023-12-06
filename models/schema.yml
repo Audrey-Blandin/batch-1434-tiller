@@ -209,3 +209,63 @@ models:
         description: number of people at the table
       - name: m_cached_payed
         description: order price paid
+  - name: mart_product_performance
+    description: Table of each product group by id_store, date_date, hour, service and for the 4 features + calculated quantities and turnover
+    tests :
+      - not_null:
+          column_name:
+            - id_store
+            - date_date
+            - hour
+    columns:                 
+      - name : id_store
+        description : identifiant unique du restaurant
+      - name: Date_date
+        description: Table open date format = Y-M-D
+      - name: hour
+        description: hour range for table open
+      - name: service
+        description: affected service depending on hour
+      - name: dim_type
+        description:  Types (products, option, meal, discounts…)
+      - name: dim_category
+        description:  Category (beverages,Thé/cafe,Café Sachet,Suppléments …)
+      - name: dim_name
+        description: Item’s name (risotto, Tonic, Cidres, Mangue…)
+      - name: dim_feature_type
+        description: Item type
+      - name: m_quantity
+        description: Quantity
+      - name: avg_m_unit_price
+        description: Average price of an unit with vat for a given hour
+      - name: m_total_price_inc_vat
+        description: Total price of( unit * quantity) with vat
+  - name: mart_time_performance
+    description: Table of KPIs for each store group by date_date, hour
+    tests:
+      - not_null:
+          column_name:
+            - id_store
+            - date_date
+            - hour
+      - unique:
+          column_name: "(id_store || '-' || date_date || '-' || hour )"
+    columns:
+      - name: id_store
+        description: id of the store
+      - name: Date_date
+        description: Table open date format = Y-M-D
+      - name: hour
+        description: hour range for table open
+      - name: nb_orders
+        description: count of orders opened per hour/date/id_store
+      - name: turnover
+        description: sum of turnover per hour/date/id_store
+      - name: total_customers
+        description: nb of customers per hour/date/id_store
+      - name: avg_client_per_table
+        description: average nb of clients per table per hour/date/id_store
+      - name: avg_time_on_table_min
+        description: average time spent on a table per open hour/date/id_store
+      - name: service
+        description: affected service depending on hour
