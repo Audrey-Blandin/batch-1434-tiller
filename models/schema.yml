@@ -118,6 +118,13 @@ sources:
             description : conutry code of the restaurant 
           - name : Dim_currency 
             description : local currency of the restaurant 
+      - name : type_service
+        description: index des types de services 
+        columns: 
+          - name : hour
+            description : heure du repas 
+          - name : service
+            description : type de service  
 models:
   - name: int_sales_channel_performance
     tests:
