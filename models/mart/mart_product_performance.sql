@@ -4,7 +4,7 @@ product_performance as (
 
 SELECT
   id_store,
-  date_opened,
+  FORMAT_DATE('%Y-%m-%d', date_opened) as date_date,
   extract(HOUR FROM date_opened) as hour,
   dim_type,
   dim_category,
@@ -18,7 +18,7 @@ GROUP BY 1,2,3,4,5,6,7)
 
 SELECT
   product_performance.id_store,
-  product_performance.date_opened,
+  product_performance.date_date,
   product_performance.hour,
   type_service.service,
   product_performance.dim_type,
