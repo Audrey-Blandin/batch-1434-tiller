@@ -137,3 +137,37 @@ models:
         description: payment method
       - name: turnover
         description: turnover associated to the payment method and date
+  - name: int_product_performance
+    description: Table of each product line in each order with the selected characteristics, joined with order_data to get id_store
+    tests :
+    - not_null:
+          column_name:
+            - id_store
+            - id_order
+            - date_opened
+    columns:                 
+      - name : id_store
+        description : identifiant unique du restaurant
+      - name: id_order
+        description: Unique identification of an order 
+      - name: Date_opened
+        description: Table open date from order_data
+      - name: id_order_line
+        description: Primary Key of the table
+        tests:
+          - unique
+          - not_null
+      - name: dim_type
+        description:  Types (products, option, meal, discounts…)
+      - name: dim_category
+        description:  Category (beverages,Thé/cafe,Café Sachet,Suppléments …)
+      - name: dim_name
+        description: Item’s name (risotto, Tonic, Cidres, Mangue…)
+      - name: dim_feature_type
+        description: Item type
+      - name: m_quantity
+        description: Quantity
+      - name: m_unit_price
+        description: Price of an unit with vat
+      - name: m_total_price_inc_vat
+        description: Total price of( unit * quantity) with vat

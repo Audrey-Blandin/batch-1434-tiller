@@ -9,7 +9,7 @@ select
     order_line.dim_feature_type,
     order_line.m_quantity,
     order_line.m_unit_price,
-    order_line.m_total_price_exc_vat
+    order_line.m_total_price_inc_vat
 FROM {{ref("stg_tiller__order_line")}} order_line
 LEFT JOIN {{ref("stg_tiller__order_data")}} order_data
 USING (id_order)
