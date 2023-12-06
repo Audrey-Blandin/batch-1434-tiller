@@ -12,7 +12,8 @@ agg_table as(
     FORMAT_DATE('%F',date_created) as date_date,
     id_store,
     dim_type,
-    ROUND(SUM(m_amount),2) as turnover
+    ROUND(SUM(m_amount),2) as turnover,
+    COUNT(id_pay) as nb_of_payment
   FROM adding_store 
   GROUP BY date_date,id_store,dim_type
 )
