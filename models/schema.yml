@@ -33,7 +33,8 @@ sources:
           - name : M_cached_payed
             description: Price payed
           - name : M_cached_price
-            description: Price to pay                
+            description: Price to pay
+
       - name: order_line
         description: Table of each product in each order
         columns:
@@ -79,7 +80,8 @@ sources:
           - name: dim_category_translated
             description: dim_category translated in english
           - name: dim_name_translated
-            description: dim_name translated in english                                          
+            description: dim_name translated in english   
+
       - name: payment_data
         description: Table of payments details
         columns:
@@ -102,6 +104,7 @@ sources:
             description: only 0, column to be dropped 
           - name: date_created
             description: date of the payment
+
       - name: store_data
         description: Table of different restaurants
         columns:
@@ -118,6 +121,7 @@ sources:
             description : conutry code of the restaurant 
           - name : Dim_currency 
             description : local currency of the restaurant 
+
       - name : type_service
         description: index des types de services 
         columns: 
@@ -144,9 +148,9 @@ sources:
             description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
           - name : Saison
             description: indicates the season of the date
+
 models:
   - name: int_sales_channel_performance
-
     columns:
       - name: date_date
         description: date associated with store and payment method
@@ -160,6 +164,7 @@ models:
         description : channel de vente a emporter ou sur place
       - name: nb_of_payment
         description : nb_of_payment
+
   - name: int_product_performance
     description: Table of each product line in each order with the selected characteristics, joined with order_data to get id_store
     tests :
@@ -194,6 +199,11 @@ models:
         description: Price of an unit with vat
       - name: m_total_price_inc_vat
         description: Total price of( unit * quantity) with vat
+      - name: solde_payed_price
+        description: solde of the tips payed
+      - name : solde_caisse_debiteur
+        description: not enough cash in the caisse 
+
   - name: int_global_performance
     description: Table of each id order with corresponding waiter and table infos inc. nb customers, turnover and time spent on table
     tests:
@@ -225,6 +235,10 @@ models:
         description: number of people at the table
       - name: m_cached_payed
         description: order price paid
+      - name : pourboire
+        description: tips
+
+
   - name: mart_product_performance
     description: Table of each product group by id_store, date_date, hour, service and for the 4 features + calculated quantities and turnover
     tests :
@@ -255,7 +269,18 @@ models:
       - name: avg_m_unit_price
         description: Average price of an unit with vat for a given hour
       - name: m_total_price_inc_vat
-        description: Total price of( unit * quantity) with vat
+        description: Total price of( unit * quantity) with vat 
+      - name : vacances_oui_non
+        description: name of the holidays. Non holidays = non vacances scolaires
+      - name : type type_vacances
+        description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : jours_feries_oui_non
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : Saison
+        description: indicates the season of the date
+
   - name: mart_time_performance
     description: Table of KPIs for each store group by date_date, hour
     tests:
@@ -285,3 +310,81 @@ models:
         description: average time spent on a table per open hour/date/id_store
       - name: service
         description: affected service depending on hour
+      - name : vacances_oui_non
+        description: name of the holidays. Non holidays = non vacances scolaires
+      - name : type type_vacances
+        description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : jours_feries_oui_non
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : Saison
+        description: indicates the season of the date
+
+  - name: mart_sales_channel_performance
+    description: Table of KPIs for each channel sales by store id and date
+    columns: 
+      - name: Date_date
+        description: Table open date format = Y-M-D
+      - name: id_store
+        description: id of the store
+      - name: turnover
+        description: sum of turnover per hour/date/id_store
+      - name : nb_of_payment
+        description : number of payment done 
+      - name : sales_channel
+        description : sales channel ( en livraison ou sur place)
+      - name : dim_type_clean
+        description : dim_type, cleaned moving from 33 cat to 11  
+      - name : vacances_oui_non
+        description: name of the holidays. Non holidays = non vacances scolaires
+      - name : type type_vacances
+        description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : jours_feries_oui_non
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : Saison
+        description: indicates the season of the date
+
+  - name: mart_waiter_performance
+    description: Table of KPIs for each channel sales by store id and date
+    columns:
+      - name: id_store
+        description: id of the store
+      - name: id_waiter
+        description: id of the waiter in charge of the table (one waiter id by order id)
+      - name: Date_date
+        description: Table open date format = Y-M-D
+      - name: hour
+        description: hour range for table open
+      - name: nb_orders
+        description: count of orders opened per hour/date/id_store
+      - name: turnover
+        description: sum of turnover per hour/date/id_store
+      - name: pourboire
+        description: tips
+      - name: solde_caisse_debiteur
+        description: if the caisse is in minus
+      - name : total_customers
+        description : nombre de customers 
+      - name: avg_client_per_table
+        description : nombre average de client par table 
+      - name : avg_time_on_table_min
+        description : avg time sur une table 
+      - name: minutes_on_a_table
+        description: time spent on the table(s) in minutes
+      - name: service
+        description: affected service depending on hour
+      - name : vacances_oui_non
+        description: name of the holidays. Non holidays = non vacances scolaires
+      - name : type type_vacances
+        description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : jours_feries_oui_non
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : Saison
+        description: indicates the season of the date
+      
+      
