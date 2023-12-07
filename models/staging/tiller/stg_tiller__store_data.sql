@@ -16,6 +16,7 @@ renamed as (
         dim_currency
 
     from source
+    where id_store<>7786 and id_store<>6008
 
 )
 
