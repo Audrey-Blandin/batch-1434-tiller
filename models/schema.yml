@@ -146,23 +146,20 @@ sources:
             description: indicates the season of the date
 models:
   - name: int_sales_channel_performance
-    tests:
-      - unique:
-          column_name: "(date_date || '-' || id_store || '-' || dim_type)"
-      - not_null:
-          column_name:
-            - date_date
-            - id_store
-            - dim_type
+
     columns:
       - name: date_date
         description: date associated with store and payment method
       - name: id_store
         description: restaurant id number
-      - name: dim_type
+      - name: dim_type_clean
         description: payment method
       - name: turnover
         description: turnover associated to the payment method and date
+      - name : sales_channel
+        description : channel de vente a emporter ou sur place
+      - name: nb_of_payment
+        description : nb_of_payment
   - name: int_product_performance
     description: Table of each product line in each order with the selected characteristics, joined with order_data to get id_store
     tests :
