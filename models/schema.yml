@@ -125,13 +125,6 @@ sources:
             description : heure du repas 
           - name : service
             description : type de service
-      - name : month_season
-        description :  index des saisons
-        columns: 
-          - name : number_of_the_month
-            description: numéro du mois
-          - name: season
-            description : saison 
 models:
   - name: int_sales_channel_performance
     tests:
