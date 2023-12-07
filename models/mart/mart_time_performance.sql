@@ -4,7 +4,7 @@ with table_agg as (
         FORMAT_DATE('%Y-%m-%d', date_opened) as date_date,
         extract(HOUR FROM date_opened) as hour,
         COUNT(id_order) as nb_orders,
-        SUM(m_cached_payed) as turnover,
+        ROUND(SUM(m_cached_payed),2) as turnover,
         SUM(m_nb_customer) as total_customers,
         (SUM(m_nb_customer)/COUNT(id_table)) as avg_client_per_table,
         ROUND(AVG(minutes_on_a_table),2) as avg_time_on_table_min
@@ -20,4 +20,15 @@ add_service as(
     ON t.hour=s.hour
 )
 
-SELECT * FROM add_service
+
+SELECT
+adds.*,
+v.vacances_oui_non,
+v.type_vacances,
+v.type_jour_ferie,
+v.jours_feries_oui_non,
+v.saison
+FROM add_service as adds
+LEFT JOIN {{ref('stg_tiller__vacances_feries_saison_zonec_2018_2020')}} as v
+ON adds.date_date=v.dates
+

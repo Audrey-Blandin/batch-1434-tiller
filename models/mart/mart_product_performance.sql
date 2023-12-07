@@ -14,8 +14,9 @@ SELECT
   round(avg(m_unit_price),2) as avg_unit_price,
   round(sum(m_total_price_inc_vat),2) as m_total_price_inc_vat
 FROM {{ref("int_product_performance")}} 
-GROUP BY 1,2,3,4,5,6,7)
+GROUP BY 1,2,3,4,5,6,7),
 
+prodperfserv as(
 SELECT
   product_performance.id_store,
   product_performance.date_date,
@@ -31,3 +32,17 @@ SELECT
 FROM product_performance
 LEFT JOIN {{ref("stg_tiller__type_service")}} type_service
 USING (hour)
+)
+
+
+
+SELECT
+p.*,
+v.vacances_oui_non,
+v.type_vacances,
+v.type_jour_ferie,
+v.jours_feries_oui_non,
+v.saison
+FROM prodperfserv as p
+LEFT JOIN {{ref('stg_tiller__vacances_feries_saison_zonec_2018_2020')}} as v
+ON p.date_date=v.dates
