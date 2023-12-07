@@ -270,10 +270,12 @@ models:
         description: Average price of an unit with vat for a given hour
       - name: m_total_price_inc_vat
         description: Total price of( unit * quantity) with vat 
-      - name : type_vacances_oui_non
+      - name : vacances_oui_non
         description: name of the holidays. Non holidays = non vacances scolaires
-      - name : jours_feries_fete
+      - name : type type_vacances
         description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : jours_feries_oui_non
         description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : Saison
@@ -308,10 +310,12 @@ models:
         description: average time spent on a table per open hour/date/id_store
       - name: service
         description: affected service depending on hour
-      - name : type_vacances_oui_non
+      - name : vacances_oui_non
         description: name of the holidays. Non holidays = non vacances scolaires
-      - name : jours_feries_fete
+      - name : type type_vacances
         description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : jours_feries_oui_non
         description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : Saison
@@ -332,10 +336,12 @@ models:
         description : sales channel ( en livraison ou sur place)
       - name : dim_type_clean
         description : dim_type, cleaned moving from 33 cat to 11  
-      - name : type_vacances_oui_non
+      - name : vacances_oui_non
         description: name of the holidays. Non holidays = non vacances scolaires
-      - name : jours_feries_fete
+      - name : type type_vacances
         description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : jours_feries_oui_non
         description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
       - name : Saison
@@ -346,21 +352,39 @@ models:
     columns:
       - name: id_store
         description: id of the store
-      - name: id_order
-        description: Primary Key of the table
-      - name: id_table
-        description: id of the table (one id table by order id)
       - name: id_waiter
         description: id of the waiter in charge of the table (one waiter id by order id)
-      - name: date_opened
-        description: date/hour when the table is opened
-      - name: date_closed
-        description: date/hour when the table is closed
-      - name: minutes_on_a_table
-        description: time spent on the table(s) in minutes
-      - name: m_nb_customer 
-        description: number of people at the table
+      - name: Date_date
+        description: Table open date format = Y-M-D
+      - name: hour
+        description: hour range for table open
+      - name: nb_orders
+        description: count of orders opened per hour/date/id_store
+      - name: turnover
+        description: sum of turnover per hour/date/id_store
       - name: pourboire
         description: tips
       - name: solde_caisse_debiteur
         description: if the caisse is in minus
+      - name : total_customers
+        description : nombre de customers 
+      - name: avg_client_per_table
+        description : nombre average de client par table 
+      - name : avg_time_on_table_min
+        description : avg time sur une table 
+      - name: minutes_on_a_table
+        description: time spent on the table(s) in minutes
+      - name: service
+        description: affected service depending on hour
+      - name : vacances_oui_non
+        description: name of the holidays. Non holidays = non vacances scolaires
+      - name : type type_vacances
+        description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+      - name : jours_feries_fete
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : jours_feries_oui_non
+        description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+      - name : Saison
+        description: indicates the season of the date
+      
+      
