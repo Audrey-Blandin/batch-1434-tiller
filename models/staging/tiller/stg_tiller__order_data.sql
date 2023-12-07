@@ -18,11 +18,12 @@ renamed as (
         date_closed,
         dim_status,
         CASE WHEN dim_source IS NULL THEN 'Other' ELSE dim_source END AS dim_source,
-        m_nb_customer,
+        CASE WHEN m_nb_customer=0 THEN 1 ELSE m_nb_customer END AS m_nb_customer,
         m_cached_payed,
         m_cached_price
 
     from source
+    where id_store<>7786 and id_store<>6008
 
 )
 
