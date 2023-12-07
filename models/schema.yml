@@ -125,6 +125,27 @@ sources:
             description : heure du repas 
           - name : service
             description : type de service
+<<<<<<< HEAD
+=======
+      - name: vacances_feries_saison_zonec_2018_2020
+        description: for each date line, indication of if this is holiday yes/no, which holiday, if bank holiday, which one, season
+        columns:
+          - name: dates
+            description: a date by day
+            tests:
+              - unique
+              - not_null
+          - name : vacances__scolaires_non_scolaires
+            description: if holidays day = "vacances", if non holidays day = "non vacances scolaires"
+          - name : type_vacances_oui_non
+            description: name of the holidays. Non holidays = non vacances scolaires
+          - name : jours_feries_fete
+            description: if not a bank holidays = "non_férié", otherwise it is the name of the bank holidays
+          - name : jours_feries_oui_non
+            description: if not a bank holidays = "non_férié", if a bank holidays = "férié"
+          - name : Saison
+            description: indicates the season of the date
+>>>>>>> 54555db81f84e601a09f076926d9e38dc64cea11
 models:
   - name: int_sales_channel_performance
     tests:
