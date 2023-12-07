@@ -12,7 +12,8 @@ SELECT
   dim_feature_type,
   round(sum(m_quantity),0) as m_quantity,
   round(avg(m_unit_price),2) as avg_unit_price,
-  round(sum(m_total_price_inc_vat),2) as m_total_price_inc_vat
+  round(sum(m_total_price_inc_vat),2) as m_total_price_inc_vat,
+  count(id_order) as nb_orders
 FROM {{ref("int_product_performance")}} 
 GROUP BY 1,2,3,4,5,6,7),
 
@@ -28,7 +29,8 @@ SELECT
   product_performance.dim_feature_type,
   product_performance.m_quantity,
   product_performance.avg_unit_price,
-  product_performance.m_total_price_inc_vat
+  product_performance.m_total_price_inc_vat,
+  product_performance.nb_orders
 FROM product_performance
 LEFT JOIN {{ref("stg_tiller__type_service")}} type_service
 USING (hour)
