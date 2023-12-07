@@ -7,13 +7,14 @@ WITH adding_store AS (
       WHEN p.dim_type = 'DELIVEROO' THEN 'Deliveroo'
       WHEN p.dim_type = 'ALLORESTO' THEN 'AlloResto'
       WHEN p.dim_type = 'UBER EATS' THEN 'UberEats'
-      WHEN p.dim_type IN ('CB_Sans_Contact','CARD', 'CB_SANS_CONTACT', 'CB_sans_contact','AMERICAN_EXPRESS') THEN 'Carte_Sans_contact'
+      WHEN p.dim_type IN ('CB_Sans_Contact','CARD', 'CB_SANS_CONTACT', 'CB_sans_contact','AMERICAN_EXPRESS') THEN 'Carte_Bleue'
       WHEN p.dim_type IN ('CARTE CADEAU') THEN 'Carte_Cadeau'
       WHEN p.dim_type IN ('BANK_TRANSFER', 'BANK_CHECK') THEN 'Transfert_Bancaire'
       WHEN p.dim_type IN ('VOUCHER', 'CARTE_TICKET_RESTAURANT', 'CARTE TICKET RESTAURANT','TICKET_RESTAURANT', 'Ticket_Restaurant_carte', 'CB_TICKET_RESTO', 'RESTO_FLASH') THEN 'Ticket_Restaurant'
       WHEN p.dim_type IN ('SUMUP', 'SIOUPLAIT', 'TAB', 'POURBOIRE_CARTE_BLEUE', 'FIVORY','AUTRES', 'alipay', 'ARRHES','APPLE PAY') THEN 'Autres_payments_electroniques'
       WHEN p.dim_type IN ( 'CREDIT_NOTE') THEN 'Credit'
-      WHEN p.dim_type IN ('CLICKEAT', 'LIVRAISON') THEN 'Click_and_Collect'
+      WHEN p.dim_type IN ('CLICKEAT') THEN 'Click_and_Collect'
+      WHEN p.dim_type IN ('LIVRAISON') THEN 'Livraison'
       WHEN p.dim_type IN ('avoir_encaissé', 'AVOIR_ENCAISSÉ') THEN 'Avoir_Encaissé'
       WHEN p.dim_type IN ('CASH') THEN 'Cash'
       ELSE 'Unknown'
@@ -25,7 +26,7 @@ WITH adding_store AS (
 column_creating as (
   select *,
  CASE
-      WHEN dim_type_clean IN ('Click_and_Collect', 'Deliveroo', 'AlloResto', 'UberEats') THEN 'Ventes_en_ligne'
+      WHEN dim_type_clean IN ('Click_and_Collect','Livraison', 'Deliveroo', 'AlloResto', 'UberEats') THEN 'Ventes_à_emporter'
       ELSE 'Ventes_sur_place'
     END AS sales_channel,
     FROM adding_store
