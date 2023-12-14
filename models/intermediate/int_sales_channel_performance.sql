@@ -26,7 +26,7 @@ WITH adding_store AS (
 column_creating as (
   select *,
  CASE
-      WHEN dim_type_clean IN ('Click_and_Collect','Livraison', 'Deliveroo', 'AlloResto', 'UberEats') THEN 'Ventes_à_emporter'
+      WHEN dim_type_clean IN ('Click_and_Collect','Livraison', 'Deliveroo', 'AlloResto', 'UberEats') THEN 'Ventes_en_livraison'
       ELSE 'Ventes_sur_place'
     END AS sales_channel,
     FROM adding_store
